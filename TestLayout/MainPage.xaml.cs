@@ -1,8 +1,13 @@
-﻿namespace TestLayout
+﻿using System.Diagnostics;
+
+namespace TestLayout
 {
     public partial class MainPage : ContentPage
     {
         int count = 0;
+
+        private DataTemplate? _activeTemplate;
+        bool _isMapView = true;
 
         public MainPage()
         {
@@ -19,15 +24,24 @@
 
         private void UpdateLayout()
         {
-            bool isLandscape = Width > Height;
 
-            var template = isLandscape ? (DataTemplate)Resources["DesktopTemplate"] 
+            if (!_isMapView)
+                return;
+
+            bool isLandscape = Width > Height;
+            bool isTablet = DeviceInfo.Idiom == DeviceIdiom.Tablet;
+
+            DataTemplate? template = isTablet 
+                ? (DataTemplate)Resources["DesktopTemplate"] 
+                : isLandscape ? (DataTemplate)Resources["DesktopTemplate"] 
                 : (DataTemplate)Resources["PhoneTemplate"];
             //this.ControlTemplate = template;
 
-            if (template is not null) 
+            if (template is not null && template != _activeTemplate) 
             {
                 MainContentPresenter.Content = (View)template.CreateContent();
+                _activeTemplate = template;
+                Debug.WriteLine("Changed Template");
             }
         }
 
@@ -53,6 +67,25 @@
             //}
         }
 
+        private void mapButton_Clicked(object sender, EventArgs e)
+        {
+            _isMapView = true;
+            UpdateLayout();
+        }
+
+        private void cardButton_Clicked(object sender, EventArgs e)
+        {
+            _isMapView = false;
+            DataTemplate? template = (DataTemplate)Resources["CardViewTemplate"];
+            //this.ControlTemplate = template;
+
+            if (template is not null && template != _activeTemplate)
+            {
+                MainContentPresenter.Content = (View)template.CreateContent();
+                _activeTemplate = template;
+                Debug.WriteLine("Changed Template");
+            }
+        }
     }
 
 }

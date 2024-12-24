@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TestLayout.Resources.Templates.Home.BottomSheet">
+    <Grid BackgroundColor="Pink" HeightRequest="200"
+          VerticalOptions="End">
+        <CollectionView Margin="5">
+            <CollectionView.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>Item 1</x:String>
+                    <x:String>Item 2</x:String>
+                    <x:String>Item 3</x:String>
+                    <x:String>Item 4</x:String>
+                    <x:String>Item 1</x:String>
+                    <x:String>Item 2</x:String>
+                    <x:String>Item 3</x:String>
+                    <x:String>Item 4</x:String>
+                    <x:String>Item 1</x:String>
+                    <x:String>Item 2</x:String>
+                    <x:String>Item 3</x:String>
+                    <x:String>Item 4</x:String>
+                </x:Array>
+            </CollectionView.ItemsSource>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border StrokeShape="RoundRectangle 4"
+                            HeightRequest="200"
+                            BackgroundColor="Grey">
+                        <Label VerticalOptions="Center"
+                               HorizontalOptions="Center"
+                               Text="{Binding .}" />
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout 
+                                 Orientation="Vertical"
+                                />
+            </CollectionView.ItemsLayout>
+        </CollectionView>
+    </Grid>
+</ContentView>
