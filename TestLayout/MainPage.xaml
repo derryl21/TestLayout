@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TestLayout.MainPage"
-             xmlns:templates="clr-namespace:TestLayout.Resources.Templates.Home">
+             xmlns:templates="clr-namespace:TestLayout.Resources.Templates.Home"
+             xmlns:local="clr-namespace:TestLayout">
 
     <ContentPage.Resources>
        <DataTemplate x:Key="DesktopTemplate">
@@ -38,14 +39,26 @@
                                 <x:String>Item 2</x:String>
                                 <x:String>Item 3</x:String>
                                 <x:String>Item 4</x:String>
+                                <x:String>Item 5</x:String>
+                                <x:String>Item 6</x:String>
+                                <x:String>Item 7</x:String>
+                                <x:String>Item 8</x:String>
+                                <x:String>Item 9</x:String>
+                                <x:String>Item 10</x:String>
+                                <x:String>Item 11</x:String>
+                                <x:String>Item 12</x:String>
                                 <x:String>Item 1</x:String>
                                 <x:String>Item 2</x:String>
                                 <x:String>Item 3</x:String>
                                 <x:String>Item 4</x:String>
-                                <x:String>Item 1</x:String>
-                                <x:String>Item 2</x:String>
-                                <x:String>Item 3</x:String>
-                                <x:String>Item 4</x:String>
+                                <x:String>Item 5</x:String>
+                                <x:String>Item 6</x:String>
+                                <x:String>Item 7</x:String>
+                                <x:String>Item 8</x:String>
+                                <x:String>Item 9</x:String>
+                                <x:String>Item 10</x:String>
+                                <x:String>Item 11</x:String>
+                                <x:String>Item 12</x:String>
                             </x:Array>
                         </CollectionView.ItemsSource>
                         <CollectionView.ItemTemplate>
@@ -113,8 +126,13 @@
                     Clicked="cardButton_Clicked"
                     x:Name="cardButton" />
         </Grid>
-        <ContentPresenter x:Name="MainContentPresenter"
-                          Grid.Row="1" />
+        <!--<ContentPresenter x:Name="MainContentPresenter"
+                          Grid.Row="1" />-->
+        <local:AdaptiveContentPresenter Grid.Row="1"
+                                        x:Name="MainContentPresenter"
+                                        DefaultLayoutTemplate="{StaticResource CardViewTemplate}"
+                                        PhoneLayoutTemplate="{StaticResource PhoneTemplate}"
+                                        DesktopLayoutTemplate="{StaticResource DesktopTemplate}"/>
         <Grid BackgroundColor="LightSteelBlue"
               Grid.Row="2">
             <Label Text="Status bar"

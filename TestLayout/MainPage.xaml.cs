@@ -12,80 +12,87 @@ namespace TestLayout
         public MainPage()
         {
             InitializeComponent();
-            SizeChanged += MainPage_SizeChanged;
-            Loaded += MainPage_Loaded;
+            //SizeChanged += MainPage_SizeChanged;
+            //Loaded += MainPage_Loaded;
         }
 
-        private void MainPage_Loaded(object? sender, EventArgs e)
-        {
-            //VisualStateManager.GoToState(this, "DesktopState");
-            UpdateLayout();
-        }
 
-        private void UpdateLayout()
-        {
+        //private void MainPage_Loaded(object? sender, EventArgs e)
+        //{
+        //    //VisualStateManager.GoToState(this, "DesktopState");
+        //    UpdateLayout();
+        //}
 
-            if (!_isMapView)
-                return;
+        //private void UpdateLayout()
+        //{
 
-            bool isLandscape = Width > Height;
-            bool isTablet = DeviceInfo.Idiom == DeviceIdiom.Tablet;
+        //    if (!_isMapView)
+        //        return;
 
-            DataTemplate? template = isTablet 
-                ? (DataTemplate)Resources["DesktopTemplate"] 
-                : isLandscape ? (DataTemplate)Resources["DesktopTemplate"] 
-                : (DataTemplate)Resources["PhoneTemplate"];
-            //this.ControlTemplate = template;
+        //    bool isLandscape = Width > Height;
+        //    bool isTablet = DeviceInfo.Idiom == DeviceIdiom.Tablet;
 
-            if (template is not null && template != _activeTemplate) 
-            {
-                MainContentPresenter.Content = (View)template.CreateContent();
-                _activeTemplate = template;
-                Debug.WriteLine("Changed Template");
-            }
-        }
+        //    DataTemplate? template = isTablet 
+        //        ? (DataTemplate)Resources["DesktopTemplate"] 
+        //        : isLandscape ? (DataTemplate)Resources["DesktopTemplate"] 
+        //        : (DataTemplate)Resources["PhoneTemplate"];
+        //    //this.ControlTemplate = template;
 
-        private void MainPage_SizeChanged(object? sender, EventArgs e)
-        {
-            UpdateLayout();
+        //    if (template is not null && template != _activeTemplate) 
+        //    {
+        //        MainContentPresenter.Content = (View)template.CreateContent();
+        //        _activeTemplate = template;
+        //        Debug.WriteLine("Changed Template");
+        //    }
+        //}
 
-            //if (DeviceInfo.Idiom == DeviceIdiom.Phone)
-            //{
-            //    VisualStateManager.GoToState(this, "PhoneState");
-            //    return;
-            //}
+        //private void MainPage_SizeChanged(object? sender, EventArgs e)
+        //{
+        //    UpdateLayout();
 
-            //VisualStateManager.GoToState(this, "DesktopState");
-            ////switch (DeviceInfo.Idiom)
-            //{
-            //    case DeviceIdiom.Phone :
-            //        VisualStateManager.GoToState(this, "PhoneState");
-            //        break;
-            //    default:
-            //        VisualStateManager.GoToState(this, "DesktopState");
-            //        break;
-            //}
-        }
+        //    //if (DeviceInfo.Idiom == DeviceIdiom.Phone)
+        //    //{
+        //    //    VisualStateManager.GoToState(this, "PhoneState");
+        //    //    return;
+        //    //}
+
+        //    //VisualStateManager.GoToState(this, "DesktopState");
+        //    ////switch (DeviceInfo.Idiom)
+        //    //{
+        //    //    case DeviceIdiom.Phone :
+        //    //        VisualStateManager.GoToState(this, "PhoneState");
+        //    //        break;
+        //    //    default:
+        //    //        VisualStateManager.GoToState(this, "DesktopState");
+        //    //        break;
+        //    //}
+        //}
 
         private void mapButton_Clicked(object sender, EventArgs e)
         {
-            _isMapView = true;
-            UpdateLayout();
+            //_isMapView = true;
+            //UpdateLayout();
+            MainContentPresenter.UseDefaultLayoutOnly = false;
         }
 
         private void cardButton_Clicked(object sender, EventArgs e)
         {
-            _isMapView = false;
-            DataTemplate? template = (DataTemplate)Resources["CardViewTemplate"];
-            //this.ControlTemplate = template;
-
-            if (template is not null && template != _activeTemplate)
-            {
-                MainContentPresenter.Content = (View)template.CreateContent();
-                _activeTemplate = template;
-                Debug.WriteLine("Changed Template");
-            }
+            MainContentPresenter.UseDefaultLayoutOnly = true;
         }
+
+        //private void cardButton_Clicked(object sender, EventArgs e)
+        //{
+        //    _isMapView = false;
+        //    DataTemplate? template = (DataTemplate)Resources["CardViewTemplate"];
+        //    //this.ControlTemplate = template;
+
+        //    if (template is not null && template != _activeTemplate)
+        //    {
+        //        MainContentPresenter.Content = (View)template.CreateContent();
+        //        _activeTemplate = template;
+        //        Debug.WriteLine("Changed Template");
+        //    }
+        //}
     }
 
 }
